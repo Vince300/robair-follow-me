@@ -1,0 +1,53 @@
+toolsets = gnu vs2015;
+archs = x86_64;
+
+outputdir            = build;
+includedirs         += include;
+gnu.makefile         = Makefile;
+vs2015.option.IntDir = 'obj\\$(Configuration)\\';
+
+if ($(toolset) == vs2015) {
+    c-compiler-options += '/D_CRT_SECURE_NO_WARNINGS /DINLINE=__inline /D_USE_MATH_DEFINES';
+}
+
+if ($(toolset) == gnu) {
+    cxx-compiler-options += '-std=c++11';
+    c-compiler-options += '-DINLINE=inline';
+}
+
+program tracker {
+    // Include directories for libraries
+    includedirs += '$(OPENNI_INCLUDE)'
+                   '$(OPENCV_INCLUDE)';
+
+    // OpenCV .lib/.a reference
+    libdirs += '$(OPENCV_LIBDIR)';
+    if ($(toolset) == vs2015) {
+        if ($(config) == Debug) {
+            libs += opencv_world310d;
+        }
+
+        if ($(config) == Release) {
+            libs += opencv_world310;
+        }
+    }
+
+    if ($(toolset) == gnu) {
+        libs += opencv_world310;
+    }
+
+    // OpenNI .lib/.a reference
+    libdirs += '$(OPENNI_LIBDIR)';
+    libs += OpenNI2;
+
+    // Project section
+    headers {
+        include/tracker.hpp
+        include/LowPassFilter.hpp
+    }
+
+    sources {
+        src/tracker.cpp
+        src/LowPassFilter.cpp
+    }
+}
