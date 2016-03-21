@@ -1,0 +1,32 @@
+{
+    "folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "../fablab_wiki"
+        }
+    ],
+    "build_systems": [
+        {
+            "cmd": [
+                "bkl",
+                "$file"
+            ],
+            "windows": {
+                "cmd": [
+                    "bkl.bat",
+                    "$file"
+                ]
+            },
+            "name": "Bakefile compiler",
+            "selector": "source.bakefile"
+        }
+    ],
+    "settings": {
+        "rulers": [
+            80,
+            120
+        ]
+    }
+}

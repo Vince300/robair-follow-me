@@ -1,1 +1,15 @@
-*.sublime-project
+*.sublime-workspace
+
+.vs/
+*.obj
+*.tlog
+*.log
+*.suo
+
+*.exe
+*.pdb
+*.idb
+*.ilk
+*.user
+
+ext/
