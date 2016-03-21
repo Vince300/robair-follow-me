@@ -22,18 +22,13 @@ program tracker {
 
     // OpenCV .lib/.a reference
     libdirs += '$(OPENCV_LIBDIR)';
-    if ($(toolset) == vs2015) {
-        if ($(config) == Debug) {
-            libs += opencv_world310d;
-        }
 
-        if ($(config) == Release) {
-            libs += opencv_world310;
-        }
+    if ($(toolset) == vs2015) {
+        libs += opencv_core310 opencv_highgui310;
     }
 
     if ($(toolset) == gnu) {
-        libs += opencv_world310;
+        libs += opencv_core opencv_highgui;
     }
 
     // OpenNI .lib/.a reference
@@ -48,6 +43,6 @@ program tracker {
 
     sources {
         src/tracker.cpp
-        src/LowPassFilter.cpp
+        src/LowPassFilter.cpp 
     }
 }

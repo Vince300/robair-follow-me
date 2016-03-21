@@ -51,7 +51,7 @@ endif
 all: build/tracker
 
 build/tracker: $(_builddir)tracker_tracker.o $(_builddir)tracker_LowPassFilter.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)tracker_tracker.o $(_builddir)tracker_LowPassFilter.o -L$(OPENCV_LIBDIR) -L$(OPENNI_LIBDIR) -lopencv_world310 -lOpenNI2 -pthread
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)tracker_tracker.o $(_builddir)tracker_LowPassFilter.o -L$(OPENCV_LIBDIR) -L$(OPENNI_LIBDIR) -lopencv_core -lopencv_highgui -lOpenNI2 -pthread
 
 $(_builddir)tracker_tracker.o: src/tracker.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -Iinclude -I$(OPENNI_INCLUDE) -I$(OPENCV_INCLUDE) -std=c++11 src/tracker.cpp
