@@ -58,7 +58,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>include;$(OPENNI_INCLUDE);$(OPENCV_INCLUDE)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(OPENNI_INCLUDE);$(OPENCV_INCLUDE)_debug</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /DINLINE=__inline /D_USE_MATH_DEFINES %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -66,7 +66,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OPENCV_LIBDIR);$(OPENNI_LIBDIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_core310.lib;opencv_highgui310.lib;opencv_imgproc310.lib;opencv_xfeatures2d310.lib;opencv_features2d310.lib;opencv_flann310.lib;OpenNI2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_core310d.lib;opencv_highgui310d.lib;opencv_imgproc310d.lib;opencv_xfeatures2d310d.lib;opencv_features2d310d.lib;opencv_flann310d.lib;OpenNI2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

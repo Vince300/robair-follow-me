@@ -17,17 +17,25 @@ if ($(toolset) == gnu) {
 
 program tracker {
     // Include directories for libraries
-    includedirs += '$(OPENNI_INCLUDE)'
-                   '$(OPENCV_INCLUDE)';
+    includedirs += '$(OPENNI_INCLUDE)';
 
     // OpenCV .lib/.a reference
     libdirs += '$(OPENCV_LIBDIR)';
 
     if ($(toolset) == vs2015) {
-        libs += opencv_core310 opencv_highgui310 opencv_imgproc310 opencv_xfeatures2d310 opencv_features2d310 opencv_flann310;
+        if ($(config) == Debug) {
+            includedirs += '$(OPENCV_INCLUDE)_debug';
+            libs += opencv_core310d opencv_highgui310d opencv_imgproc310d opencv_xfeatures2d310d opencv_features2d310d opencv_flann310d;
+        }
+
+        if ($(config) == Release) {
+            includedirs += '$(OPENCV_INCLUDE)';
+            libs += opencv_core310 opencv_highgui310 opencv_imgproc310 opencv_xfeatures2d310 opencv_features2d310 opencv_flann310;
+        }
     }
 
     if ($(toolset) == gnu) {
+        includedirs += '$(OPENCV_INCLUDE)';
         libs += opencv_core opencv_highgui opencv_imgproc opencv_xfeatures2d opencv_features2d opencv_flann;
     }
 
