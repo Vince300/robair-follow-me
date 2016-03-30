@@ -44,6 +44,11 @@ void Application::run()
     cv::setMouseCallback(WINDOW_TITLE, ::onMouse, this);
 
     cvs().printStreamInfo();
+
+    // OpenCV objects
+    auto detector = cv::xfeatures2d::SurfFeatureDetector::create();
+    auto descriptor = cv::xfeatures2d::SurfDescriptorExtractor::create();
+    cv::FlannBasedMatcher matcher;
     
     bool exit = false;
     while (!exit)
@@ -65,13 +70,10 @@ void Application::run()
         {
             // Find features
             FeatureCapture fc(lastVideoFrame);
-            auto detector = cv::xfeatures2d::SurfFeatureDetector::create();
-            auto descriptor = cv::xfeatures2d::SurfDescriptorExtractor::create();
 
             detector->detect(fc.frame, fc.keyPoints);
             descriptor->compute(fc.frame, fc.keyPoints, fc.descriptors);
 
-            cv::FlannBasedMatcher matcher;
             std::vector<cv::DMatch> matches;
             matcher.match(tracking.descriptors, fc.descriptors, matches);
             cv::drawMatches(tracking.frame, tracking.keyPoints, displayFrame, fc.keyPoints, matches, m, tracking.color, cv::Scalar(255, 0, 0));
@@ -118,7 +120,7 @@ void Application::addRegionOfInterest(int x, int y)
     cv::Mat mask;
     try
     {
-        cv::Scalar dataScalar = lastDepthFrame.at<cv::Scalar_<uint16_t>>(y, x);
+        cv::Scalar dataScalar = lastDepthFrame.at<ushort>(y, x);
         uint32_t data = dataScalar.val[0];
         if (data == 0) return;
         
