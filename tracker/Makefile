@@ -50,14 +50,29 @@ $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_er
 endif
 all: build/tracker
 
-build/tracker: $(_builddir)tracker_tracker.o $(_builddir)tracker_LowPassFilter.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)tracker_tracker.o $(_builddir)tracker_LowPassFilter.o -L$(OPENCV_LIBDIR) -L$(OPENNI_LIBDIR) -lopencv_core -lopencv_highgui -lOpenNI2 -pthread
+build/tracker: $(_builddir)tracker_Application.o $(_builddir)tracker_ColorVideoStream.o $(_builddir)tracker_DepthVideoStream.o $(_builddir)tracker_FeatureCapture.o $(_builddir)tracker_LowPassFilter.o $(_builddir)tracker_tracker.o $(_builddir)tracker_VideoStream.o
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)tracker_Application.o $(_builddir)tracker_ColorVideoStream.o $(_builddir)tracker_DepthVideoStream.o $(_builddir)tracker_FeatureCapture.o $(_builddir)tracker_LowPassFilter.o $(_builddir)tracker_tracker.o $(_builddir)tracker_VideoStream.o -L$(OPENCV_LIBDIR) -L$(OPENNI_LIBDIR) -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_xfeatures2d -lopencv_features2d -lopencv_flann -lOpenNI2 -pthread
+
+$(_builddir)tracker_Application.o: src/Application.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -Iinclude -I$(OPENNI_INCLUDE) -I$(OPENCV_INCLUDE) -std=c++11 src/Application.cpp
+
+$(_builddir)tracker_ColorVideoStream.o: src/ColorVideoStream.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -Iinclude -I$(OPENNI_INCLUDE) -I$(OPENCV_INCLUDE) -std=c++11 src/ColorVideoStream.cpp
+
+$(_builddir)tracker_DepthVideoStream.o: src/DepthVideoStream.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -Iinclude -I$(OPENNI_INCLUDE) -I$(OPENCV_INCLUDE) -std=c++11 src/DepthVideoStream.cpp
+
+$(_builddir)tracker_FeatureCapture.o: src/FeatureCapture.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -Iinclude -I$(OPENNI_INCLUDE) -I$(OPENCV_INCLUDE) -std=c++11 src/FeatureCapture.cpp
+
+$(_builddir)tracker_LowPassFilter.o: src/LowPassFilter.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -Iinclude -I$(OPENNI_INCLUDE) -I$(OPENCV_INCLUDE) -std=c++11 src/LowPassFilter.cpp
 
 $(_builddir)tracker_tracker.o: src/tracker.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -Iinclude -I$(OPENNI_INCLUDE) -I$(OPENCV_INCLUDE) -std=c++11 src/tracker.cpp
 
-$(_builddir)tracker_LowPassFilter.o: src/LowPassFilter.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -Iinclude -I$(OPENNI_INCLUDE) -I$(OPENCV_INCLUDE) -std=c++11 src/LowPassFilter.cpp
+$(_builddir)tracker_VideoStream.o: src/VideoStream.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -Iinclude -I$(OPENNI_INCLUDE) -I$(OPENCV_INCLUDE) -std=c++11 src/VideoStream.cpp
 
 clean:
 	rm -f $(_builddir)*.o

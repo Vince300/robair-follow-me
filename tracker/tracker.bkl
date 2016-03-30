@@ -24,11 +24,11 @@ program tracker {
     libdirs += '$(OPENCV_LIBDIR)';
 
     if ($(toolset) == vs2015) {
-        libs += opencv_core310 opencv_highgui310;
+        libs += opencv_core310 opencv_highgui310 opencv_imgproc310 opencv_xfeatures2d310 opencv_features2d310 opencv_flann310;
     }
 
     if ($(toolset) == gnu) {
-        libs += opencv_core opencv_highgui;
+        libs += opencv_core opencv_highgui opencv_imgproc opencv_xfeatures2d opencv_features2d opencv_flann;
     }
 
     // OpenNI .lib/.a reference
@@ -37,12 +37,22 @@ program tracker {
 
     // Project section
     headers {
-        include/tracker.hpp
+        include/Application.hpp
+        include/ColorVideoStream.hpp
+        include/DepthVideoStream.hpp
+        include/FeatureCapture.hpp
         include/LowPassFilter.hpp
+        include/Utils.hpp
+        include/VideoStream.hpp
     }
 
     sources {
+        src/Application.cpp
+        src/ColorVideoStream.cpp
+        src/DepthVideoStream.cpp
+        src/FeatureCapture.cpp
+        src/LowPassFilter.cpp
         src/tracker.cpp
-        src/LowPassFilter.cpp 
+        src/VideoStream.cpp
     }
 }

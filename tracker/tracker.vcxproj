@@ -66,7 +66,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OPENCV_LIBDIR);$(OPENNI_LIBDIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_core310.lib;opencv_highgui310.lib;OpenNI2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_core310.lib;opencv_highgui310.lib;opencv_imgproc310.lib;opencv_xfeatures2d310.lib;opencv_features2d310.lib;opencv_flann310.lib;OpenNI2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -88,16 +88,26 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(OPENCV_LIBDIR);$(OPENNI_LIBDIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_core310.lib;opencv_highgui310.lib;OpenNI2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_core310.lib;opencv_highgui310.lib;opencv_imgproc310.lib;opencv_xfeatures2d310.lib;opencv_features2d310.lib;opencv_flann310.lib;OpenNI2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\tracker.cpp" />
+    <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\ColorVideoStream.cpp" />
+    <ClCompile Include="src\DepthVideoStream.cpp" />
+    <ClCompile Include="src\FeatureCapture.cpp" />
     <ClCompile Include="src\LowPassFilter.cpp" />
+    <ClCompile Include="src\tracker.cpp" />
+    <ClCompile Include="src\VideoStream.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\tracker.hpp" />
+    <ClInclude Include="include\Application.hpp" />
+    <ClInclude Include="include\ColorVideoStream.hpp" />
+    <ClInclude Include="include\DepthVideoStream.hpp" />
+    <ClInclude Include="include\FeatureCapture.hpp" />
     <ClInclude Include="include\LowPassFilter.hpp" />
+    <ClInclude Include="include\Utils.hpp" />
+    <ClInclude Include="include\VideoStream.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
