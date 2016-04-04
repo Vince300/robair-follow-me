@@ -41,7 +41,7 @@ CC := cc
 CXX := c++
 
 # The directory for the build files, may be overridden on make command line.
-builddir = .
+builddir = obj
 
 ifneq ($(builddir),.)
 _builddir := $(builddir)/
@@ -51,7 +51,7 @@ endif
 all: build/tracker
 
 build/tracker: $(_builddir)tracker_Application.o $(_builddir)tracker_ColorVideoStream.o $(_builddir)tracker_DepthVideoStream.o $(_builddir)tracker_FeatureCapture.o $(_builddir)tracker_LowPassFilter.o $(_builddir)tracker_tracker.o $(_builddir)tracker_VideoStream.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)tracker_Application.o $(_builddir)tracker_ColorVideoStream.o $(_builddir)tracker_DepthVideoStream.o $(_builddir)tracker_FeatureCapture.o $(_builddir)tracker_LowPassFilter.o $(_builddir)tracker_tracker.o $(_builddir)tracker_VideoStream.o -L$(OPENCV_LIBDIR) -L$(OPENNI_LIBDIR) -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_xfeatures2d -lopencv_features2d -lopencv_flann -lOpenNI2 -pthread
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)tracker_Application.o $(_builddir)tracker_ColorVideoStream.o $(_builddir)tracker_DepthVideoStream.o $(_builddir)tracker_FeatureCapture.o $(_builddir)tracker_LowPassFilter.o $(_builddir)tracker_tracker.o $(_builddir)tracker_VideoStream.o -L$(OPENCV_LIBDIR) -L$(OPENNI_LIBDIR) -lopencv_core -lopencv_highgui -lopencv_imgproc -lOpenNI2 -pthread
 
 $(_builddir)tracker_Application.o: src/Application.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -Iinclude -I$(OPENNI_INCLUDE) -I$(OPENCV_INCLUDE) -std=c++11 src/Application.cpp

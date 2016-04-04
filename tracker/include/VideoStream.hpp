@@ -19,7 +19,7 @@ public:
     virtual cv::Mat captureFrame() = 0;
     virtual cv::Mat displayFrame(const cv::Mat &source);
 
-    virtual void printStreamInfo();
+    virtual void VideoStream::printStreamInfo(std::ostream &os);
 
 protected:
     const void *readFrameData();

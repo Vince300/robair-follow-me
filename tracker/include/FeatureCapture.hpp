@@ -8,9 +8,7 @@
 struct FeatureCapture
 {
     FeatureCapture();
-    FeatureCapture(const cv::Mat &frame, const cv::Mat &mask);
 
-    cv::Mat frame;
     cv::Mat mask;
     cv::Scalar mean;
 

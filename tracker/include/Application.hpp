@@ -34,7 +34,7 @@ public:
 
 protected:
     // Detects features inside a specific radius around a mouse event
-    void updateRegionOfInterest(int x, int y);
+    void updateRegionOfInterest(int x, int y, cv::Scalar fallbackValue);
 
     // The actual mouse callback
     void onMouse(int evt, int x, int y, int flags);

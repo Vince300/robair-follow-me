@@ -25,18 +25,18 @@ program tracker {
     if ($(toolset) == vs2015) {
         if ($(config) == Debug) {
             includedirs += '$(OPENCV_INCLUDE)_debug';
-            libs += opencv_core310d opencv_highgui310d opencv_imgproc310d opencv_xfeatures2d310d opencv_features2d310d opencv_flann310d;
+            libs += opencv_core310d opencv_highgui310d opencv_imgproc310d;
         }
 
         if ($(config) == Release) {
             includedirs += '$(OPENCV_INCLUDE)';
-            libs += opencv_core310 opencv_highgui310 opencv_imgproc310 opencv_xfeatures2d310 opencv_features2d310 opencv_flann310;
+            libs += opencv_core310 opencv_highgui310 opencv_imgproc310;
         }
     }
 
     if ($(toolset) == gnu) {
         includedirs += '$(OPENCV_INCLUDE)';
-        libs += opencv_core opencv_highgui opencv_imgproc opencv_xfeatures2d opencv_features2d opencv_flann;
+        libs += opencv_core opencv_highgui opencv_imgproc;
     }
 
     // OpenNI .lib/.a reference
