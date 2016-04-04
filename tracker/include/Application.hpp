@@ -12,6 +12,7 @@ typedef enum
 #include <memory>
 
 #include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <OpenNI.h>
 
 #include "VideoStream.hpp"
@@ -33,7 +34,7 @@ public:
 
 protected:
     // Detects features inside a specific radius around a mouse event
-    void addRegionOfInterest(int x, int y);
+    void updateRegionOfInterest(int x, int y);
 
     // The actual mouse callback
     void onMouse(int evt, int x, int y, int flags);

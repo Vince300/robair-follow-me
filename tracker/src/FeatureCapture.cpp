@@ -1,11 +1,11 @@
 #include "FeatureCapture.hpp"
 
 FeatureCapture::FeatureCapture()
-    : frame(), descriptors(), keyPoints(), color()
+    : frame(), mask(), mean(0)
 {
 }
 
-FeatureCapture::FeatureCapture(const cv::Mat &mat)
-    : frame(mat), descriptors(), keyPoints(), color()
+FeatureCapture::FeatureCapture(const cv::Mat &frame, const cv::Mat &mask)
+    : frame(frame), mask(mask), mean(0)
 {
 }

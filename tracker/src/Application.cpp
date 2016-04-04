@@ -49,7 +49,11 @@ void Application::run()
     auto detector = cv::xfeatures2d::SurfFeatureDetector::create();
     auto descriptor = cv::xfeatures2d::SurfDescriptorExtractor::create();
     cv::FlannBasedMatcher matcher;
-    
+
+    int param1 = 24;
+    cv::namedWindow("Params");
+    cv::createTrackbar("Param 1", "Params", &param1, 255);
+
     bool exit = false;
     while (!exit)
     {
@@ -61,24 +65,19 @@ void Application::run()
         lastDepthFrame = (mode == Video ? videoStreams[Depth]->captureFrame() : frame);
         lastVideoFrame = (mode == Depth ? videoStreams[Video]->captureFrame() : frame);
 
+        if (tracking.mean != cv::Scalar(0))
+        {
+            auto newMean = cv::mean(lastDepthFrame, tracking.mask);
+
+            cv::Moments m = moments(tracking.mask, true);
+
+            updateRegionOfInterest(m.m10 / m.m00, m.m01 / m.m00);
+        }
+
         // Get frame ready for displaying
         auto displayFrame = vs.displayFrame(frame);
         cv::Mat m(displayFrame);
-
-        // Perform tracking
-        if (!tracking.keyPoints.empty())
-        {
-            // Find features
-            FeatureCapture fc(lastVideoFrame);
-
-            detector->detect(fc.frame, fc.keyPoints);
-            descriptor->compute(fc.frame, fc.keyPoints, fc.descriptors);
-
-            std::vector<cv::DMatch> matches;
-            matcher.match(tracking.descriptors, fc.descriptors, matches);
-            cv::drawMatches(tracking.frame, tracking.keyPoints, displayFrame, fc.keyPoints, matches, m, tracking.color, cv::Scalar(255, 0, 0));
-        }
-
+        
         // Display resulting image
         cv::imshow(WINDOW_TITLE, m);
 
@@ -111,13 +110,12 @@ void Application::run()
 VideoStream &Application::cvs() { return *videoStreams[mode]; }
 
 // Detects features inside a specific radius around a mouse event
-void Application::addRegionOfInterest(int x, int y)
+void Application::updateRegionOfInterest(int x, int y)
 {
     // Set video frame reference for tracking
     tracking.frame = lastVideoFrame;
     
     // Build a mask
-    cv::Mat mask;
     try
     {
         cv::Scalar dataScalar = lastDepthFrame.at<ushort>(y, x);
@@ -125,7 +123,17 @@ void Application::addRegionOfInterest(int x, int y)
         if (data == 0) return;
         
         uint32_t lw = (9 * data) / 10, ub = (11 * data) / 10;
-        cv::inRange(lastDepthFrame, cv::Scalar(lw), cv::Scalar(ub), mask);
+        cv::Mat q;
+        cv::inRange(lastDepthFrame, cv::Scalar(lw), cv::Scalar(ub), q);
+
+        // Filter using rectangle
+        int w = lastDepthFrame.cols / 3, h = lastDepthFrame.rows / 2;
+        cv::Mat rectFilt(lastDepthFrame.size(), CV_8U);
+        
+        cv::Mat mr(rectFilt, cv::Rect(max(0, x - w / 2), 0, w, lastDepthFrame.rows));
+        mr = cv::Scalar(255);
+        cv::imshow("prout", rectFilt);
+        cv::bitwise_and(q, rectFilt, tracking.mask);
     }
     catch (cv::Exception &ex)
     {
@@ -134,18 +142,12 @@ void Application::addRegionOfInterest(int x, int y)
     }
 
     // Display mask data
-    cv::imshow("Mask data", mask);
-    
-    // Detect features
-    auto detector = cv::xfeatures2d::SurfFeatureDetector::create();
-    detector->detect(tracking.frame, tracking.keyPoints, mask);
-
-    // Descriptor
-    auto descriptor = cv::xfeatures2d::SurfDescriptorExtractor::create();
-    descriptor->compute(tracking.frame, tracking.keyPoints, tracking.descriptors);
-
-    // Setup data
-    tracking.color = cv::Scalar(rand() % 255, rand() % 255, rand() % 255);
+    cv::imshow("Mask data", tracking.mask);
+    tracking.mean = cv::mean(lastDepthFrame, tracking.mask);
+    tracking.poi_x = x;
+    tracking.poi_y = y;
+    std::cerr << "Average depth value: " << tracking.mean << std::endl;
+    std::cerr << "Point of interest: (" << x << ", " << y << ")" << std::endl;
 }
 
 // The actual mouse callback
@@ -158,11 +160,11 @@ void Application::onMouse(int evt, int x, int y, int flags)
         break;
     case CV_EVENT_LBUTTONDOWN:
         mouseDown = true;
-        addRegionOfInterest(x, y);
+        updateRegionOfInterest(x, y);
         break;
     case CV_EVENT_MOUSEMOVE:
         if (mouseDown)
-            addRegionOfInterest(x, y);
+            updateRegionOfInterest(x, y);
         break;
     }
 }

@@ -8,12 +8,14 @@
 struct FeatureCapture
 {
     FeatureCapture();
-    FeatureCapture(const cv::Mat &mat);
+    FeatureCapture(const cv::Mat &frame, const cv::Mat &mask);
 
     cv::Mat frame;
-    cv::Mat descriptors;
-    std::vector<cv::KeyPoint> keyPoints;
-    cv::Scalar color;
+    cv::Mat mask;
+    cv::Scalar mean;
+
+    int poi_x;
+    int poi_y;
 };
 
 #endif
