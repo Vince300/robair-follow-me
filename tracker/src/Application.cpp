@@ -75,7 +75,7 @@ void Application::run()
             // Output space separated data
             // Format is hpos from -0.5 to 0.5, depth in m from camera, time in ms since start
             std::cout << std::fixed << std::setprecision(6)
-                << ((double)tracking.poi_x / lastDepthFrame.cols - 0.5) << " " 
+                << ((double)tracking.poi_x / lastDepthFrame.cols - 0.5) * 2.0 << " " 
                 << tracking.mean.val[0] / 1000.0 << " "
                 << tmstart.elapsed() * 1000.0 << " "
                 << frameId
