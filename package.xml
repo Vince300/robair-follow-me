@@ -1,0 +1,17 @@
+<package>
+  <name>suivi</name>
+  <version>1.2.4</version>
+  <description>
+  This package provides an algorithm to folow a person.
+  </description>
+  <maintainer email="clement.dufour@ensimag.grenoble-inp.fr">FabLab ensimag</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+</package>
