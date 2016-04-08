@@ -18,6 +18,9 @@ add_executable(listener controleur/src/listener.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES})
 add_dependencies(listener suivi_generate_messages_cpp)
 
+install(DIRECTORY launch/ 
+DESTINATION $(CATKIN_PACKAGE_SHARE_DESTINATION)/launch)
+
 #add_executable(tracker tracker/src/tracker.cpp tracker/src/Application.cpp tracker/src/ColorVideoStream.cpp tracker/src/DepthVideoStream.cpp #tracker/src/FeatureCapture.cpp tracker/src/LowPassFilter.cpp tracker/src/VideoStream.cpp)
 #target_link_libraries(tracker ${catkin_LIBRARIES})
 #add_dependencies(tracker suivi_generate_messages_cpp)
