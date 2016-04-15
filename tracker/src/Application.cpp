@@ -137,7 +137,7 @@ void Application::updateRegionOfInterest(int x, int y, cv::Scalar fallbackValue)
 
         // Width and height of the rectangle
         int w = lastDepthFrame.cols / 3, h = lastDepthFrame.rows;
-        int x0 = max(0, x - w / 2);
+        int x0 = std::max(0, x - w / 2);
 
         if (x + w / 2 > lastDepthFrame.cols)
         {

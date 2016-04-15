@@ -1,12 +1,12 @@
 #include "ros/ros.h"
-#include "std_msgs/String.h"
+#include "md49test/MotorCmd.h"
 
 /**
  * This tutorial demonstrates simple receipt of messages over the ROS system.
  */
 void chatterCallback(const md49test::MotorCmd::ConstPtr& msg)
 {
-  ROS_INFO("I heard: [%s]", msg->to_string(speed1).c_str());
+  ROS_INFO("I heard: [%i]", msg->speed1);
 }
 
 int main(int argc, char **argv)

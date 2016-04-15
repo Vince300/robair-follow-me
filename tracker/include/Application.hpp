@@ -56,7 +56,7 @@ private:
     WindowDisplayMode mode;
 
     // The video streams
-    std::vector<std::shared_ptr<VideoStream>> videoStreams;
+    std::vector<std::shared_ptr<VideoStream> > videoStreams;
 };
 
 

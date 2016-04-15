@@ -10,9 +10,12 @@
     auto result = (expr);\
     if (result != openni::Status::STATUS_OK) {\
         std::stringstream ss;\
-        ss << "In " << __FILE__ << ":" << __LINE__ << " at " << ##expr << ": ";\
+        ss << "In " << __FILE__ << ":" << __LINE__ << " at " << ": ";\
         ss << (int)result; throw std::runtime_error(ss.str().c_str());\
     }\
 }
 
 #endif
+
+
+/*        ss << "In " << __FILE__ << ":" << __LINE__ << " at " << ##expr << ": ";\*/
