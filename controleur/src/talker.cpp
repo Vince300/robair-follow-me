@@ -6,7 +6,7 @@ Elles permettent la création d'objet c++/python de ce type de message.*/
 
 #include <sstream>
 
-void chatterCallback(const md49test::MotorCmd::ConstPtr& msglis)
+void chatterCallback(const std_msgs::String::ConstPtr& msglis)
 {
   ROS_INFO("I heard: [%s]", msglis->data.c_str());
 }
