@@ -6,22 +6,14 @@ Elles permettent la création d'objet c++/python de ce type de message.*/
 
 #include <sstream>
 
-void chatterCallback(const std_msgs::String::ConstPtr& msglis)
-{
-  ROS_INFO("I heard: [%s]", msglis->data.c_str());
-}
-
 int main(int argc, char **argv)
 {
 /*Cette commande crée un noeud du nom de talker dans la package dans lequel il se trouve ( pour run , rosrun suivi talker )*/
   ros::init(argc, argv, "talker");
-ros::init(argc, argv, "listener");
 
-  ros::NodeHandle nlis;
-ros::NodeHandle npub;
+  ros::NodeHandle n;
 /*Cette commande crée un topic du nom cmdmotors et va publier un message de type md49test::MotorCmd dessus, 1000 messages dans le buffer*/
-  ros::Publisher chatter_pub = npub.advertise<md49test::MotorCmd>("cmdmotors", 1000);
-ros::Subscriber sub = nlis.subscribe("chatter", 1000, chatterCallback);
+  ros::Publisher chatter_pub = n.advertise<md49test::MotorCmd>("cmdmotors", 1000);
 /*Nombre de messages par seconde*/
   ros::Rate loop_rate(1);
 
@@ -43,6 +35,6 @@ ros::Subscriber sub = nlis.subscribe("chatter", 1000, chatterCallback);
     loop_rate.sleep();
   }
 
-ros::spin();
+
   return 0;
 }
