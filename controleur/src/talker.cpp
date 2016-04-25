@@ -1,4 +1,5 @@
 #include "ros/ros.h"
+#include "std_msgs/String.h"
 /*md49test est un package qui contient un fichier msg/MotorCmd.msg, 
 Il faut rajouter les dépendances dans package.xml et CMakeLists.txt 
 Elles permettent la création d'objet c++/python de ce type de message.*/
