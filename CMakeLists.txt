@@ -6,16 +6,14 @@ find_package(catkin REQUIRED COMPONENTS roscpp rospy md49test)
 find_package( OpenCV REQUIRED )
 FIND_LIBRARY( OPENNI2_LIBRARY
              NAMES OpenNI2
-             HINTS /home/robair/groupeDufour/OpenNI-Linux-x64-2.2
+             HINTS /home/robair/groupeDufour/OpenNI-Linux-x86-2.2
              PATH_SUFFIXES lib lib64
 )
 FIND_PATH( OPENNI2_INCLUDE_DIR OpenNI.h
-          HINTS /home/robair/groupeDufour/OpenNI-Linux-x64-2.2
+          HINTS /home/robair/groupeDufour/OpenNI-Linux-x86-2.2
           PATH_SUFFIXES openni2 ni2)
 
-
-
-## Declare a catkin package
+# Declare a catkin package
 catkin_package()
 
 ## Build talker and listener
