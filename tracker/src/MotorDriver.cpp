@@ -50,22 +50,30 @@ void MotorDriver::threadCallback()
         {
             double angle, speed;
             tracker->getCommandData(speed, angle);
+		std::cerr << "Command speed = " << speed << " angle = " << angle << std::endl;
 
-            int16_t scale = 127;
-
-            msg.speed1 = speed * scale + (angle * scale / 2);
-            msg.speed2 = speed * scale - (angle * scale / 2);
+            int16_t scale = 127, scaleAngle = 30;
+            if (std::abs(angle) > 0.1) {
+		double scaled = (angle < 0.0 ? -1.0 : 0.0) * std::sqrt(std::abs(angle));
+		msg.speed1 = angle * scaleAngle;
+		msg.speed2 = -angle * scaleAngle;		
+            } else {
+                msg.speed1 = speed * scale;
+		msg.speed2 = speed * scale;
+            }
         }
         else
         {
             msg.speed1 = 0;
             msg.speed2 = 0;
         }
+	std::cerr << "Raw drive values speed1 = " << msg.speed1 << " speed2 = " << msg.speed2 << std::endl;
+	// Clamp values
 	if (msg.speed1 < -127) msg.speed1 = -127;
 	if (msg.speed1 > 127) msg.speed1 = 127;
 	if (msg.speed2 < -127) msg.speed2 = -127;
 	if (msg.speed2 > 127) msg.speed2 = 127;
-	std::cerr << msg.speed1 << " " << msg.speed2 << std::endl;
+
 	msg.speed1 += offset;
 	msg.speed2 += offset;
         /* Publie le message sur le topic */
