@@ -70,9 +70,6 @@
     <ClCompile Include="src\LowPassFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MotorDriver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\ObstaclesBasicTracker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -82,13 +79,16 @@
     <ClCompile Include="src\TargetTracker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\tracker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\VideoStream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\PIDController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\noros\MotorDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\noros\tracker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -97,13 +97,13 @@
     <ClCompile Include="src\DepthVideoStream.cpp" />
     <ClCompile Include="src\FeatureCapture.cpp" />
     <ClCompile Include="src\LowPassFilter.cpp" />
-    <ClCompile Include="src\MotorDriver.cpp" />
     <ClCompile Include="src\ObstaclesBasicTracker.cpp" />
     <ClCompile Include="src\SlidingWindowTracker.cpp" />
     <ClCompile Include="src\TargetTracker.cpp" />
-    <ClCompile Include="src\tracker.cpp" />
     <ClCompile Include="src\VideoStream.cpp" />
     <ClCompile Include="src\PIDController.cpp" />
+    <ClCompile Include="src\noros\MotorDriver.cpp" />
+    <ClCompile Include="src\noros\tracker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Application.hpp" />

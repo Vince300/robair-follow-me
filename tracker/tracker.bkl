@@ -50,12 +50,13 @@ program tracker {
         src/DepthVideoStream.cpp
         src/FeatureCapture.cpp
         src/LowPassFilter.cpp
-        src/MotorDriver.cpp
         src/ObstaclesBasicTracker.cpp
         src/SlidingWindowTracker.cpp
         src/TargetTracker.cpp
-        src/tracker.cpp
         src/VideoStream.cpp
         src/PIDController.cpp
+
+        src/noros/MotorDriver.cpp
+        src/noros/tracker.cpp
     }
 }

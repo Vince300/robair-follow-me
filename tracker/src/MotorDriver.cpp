@@ -47,8 +47,7 @@ void MotorDriver::threadCallback()
         md49test::MotorCmd msg;
 
         double angle = 0.0, speed = 0.0;
-        int16_t offset = 0;
-	int16_t scale = 127;
+        int16_t scale = 127;
         int16_t scaleAngle = scale / 3;
         if (tracker)
         {
@@ -63,10 +62,10 @@ void MotorDriver::threadCallback()
                 msg.speed1 = angle * scaleAngle;
                 msg.speed2 = -angle * scaleAngle;
             } else {
-		speed = speedController.timeStep();
-		msg.speed1 = speed * ((1.0 + angle) / 2.0 * scale);
+                speed = speedController.timeStep();
+                msg.speed1 = speed * ((1.0 + angle) / 2.0 * scale);
                 msg.speed2 = speed * ((1.0 - angle) / 2.0 * scale);
-	    }
+            }
         }
         else
         {
@@ -83,9 +82,6 @@ void MotorDriver::threadCallback()
         if (msg.speed1 > scale) msg.speed1 = scale;
         if (msg.speed2 < -scale) msg.speed2 = -scale;
         if (msg.speed2 > scale) msg.speed2 = scale;
-
-        msg.speed1 += offset;
-        msg.speed2 += offset;
 
         /* Publie le message sur le topic */
         chatter_pub.publish(msg);
