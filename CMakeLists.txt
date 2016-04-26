@@ -11,9 +11,6 @@ find_package(OpenCV REQUIRED)
 include_directories(include ${catkin_INCLUDE_DIRS} tracker/include $ENV{OPENNI2_INCLUDE})
 link_directories($ENV{OPENNI2_REDIST} ${OpenCV_LIBS})
 
-add_message_files(FILES image.msg)
-generate_messages(DEPENDENCIES std_msgs)
-
 # Declare a catkin package
 catkin_package(CATKIN_DEPENDS message_runtime)
 
