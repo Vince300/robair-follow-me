@@ -3,6 +3,7 @@
 
 #include <thread>
 #include "TargetTracker.hpp"
+#include "PIDController.hpp"
 
 /**
  * \brief Represents the motor driving interface and worker thread.
@@ -35,6 +36,10 @@ private:
     std::shared_ptr<TargetTracker> targetTracker;
     /// Exit flag for the worker thread.
     bool doExit;
+    /// PID Controller for the speed value
+    PIDController speedController;
+    /// PID Controller for the angle value
+    PIDController angleController;
 };
 
 #endif

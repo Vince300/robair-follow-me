@@ -41,6 +41,7 @@ program tracker {
         include/TargetTracker.hpp
         include/Utils.hpp
         include/VideoStream.hpp
+        include/PIDController.hpp
     }
 
     sources {
@@ -55,5 +56,6 @@ program tracker {
         src/TargetTracker.cpp
         src/tracker.cpp
         src/VideoStream.cpp
+        src/PIDController.cpp
     }
 }

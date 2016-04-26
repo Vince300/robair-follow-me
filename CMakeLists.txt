@@ -31,5 +31,6 @@ add_executable(tracker
     tracker/src/VideoStream.cpp
     tracker/src/ObstaclesBasicTracker.cpp
     tracker/src/SlidingWindowTracker.cpp
-    tracker/src/TargetTracker.cpp)
+    tracker/src/TargetTracker.cpp
+    tracker/src/PIDController.cpp)
 target_link_libraries(tracker ${catkin_LIBRARIES}  OpenNI2 opencv_core opencv_highgui opencv_imgproc)

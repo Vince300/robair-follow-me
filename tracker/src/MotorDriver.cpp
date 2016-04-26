@@ -8,7 +8,10 @@
 MotorDriver::MotorDriver()
     : workerThread(&MotorDriver::threadCallback, this),
     targetTracker(nullptr),
-    doExit(false)
+    doExit(false),
+    /* PID initialization, kP, kI, kD */
+    speedController(0.8, 0.15, 0.05),
+    angleController(0.8, 0.15, 0.05)
 {
 }
 
@@ -47,8 +50,13 @@ void MotorDriver::threadCallback()
         int16_t offset = 0;
         if (tracker)
         {
-
             tracker->getCommandData(speed, angle);
+            
+            speedController.setTargetValue(speed);
+            angleController.setTargetValue(angle);
+
+            speed = speedController.timeStep();
+            angle = angleController.timeStep();
 
             int16_t scale = 127, scaleAngle = 30;
             if (std::abs(angle) > 0.1) {

@@ -103,6 +103,7 @@
     <ClCompile Include="src\TargetTracker.cpp" />
     <ClCompile Include="src\tracker.cpp" />
     <ClCompile Include="src\VideoStream.cpp" />
+    <ClCompile Include="src\PIDController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Application.hpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="include\TargetTracker.hpp" />
     <ClInclude Include="include\Utils.hpp" />
     <ClInclude Include="include\VideoStream.hpp" />
+    <ClInclude Include="include\PIDController.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
