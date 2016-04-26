@@ -97,6 +97,9 @@
     <ClCompile Include="src\DepthVideoStream.cpp" />
     <ClCompile Include="src\FeatureCapture.cpp" />
     <ClCompile Include="src\LowPassFilter.cpp" />
+    <ClCompile Include="src\ObstaclesBasicTracker.cpp" />
+    <ClCompile Include="src\SlidingWindowTracker.cpp" />
+    <ClCompile Include="src\TargetTracker.cpp" />
     <ClCompile Include="src\tracker.cpp" />
     <ClCompile Include="src\VideoStream.cpp" />
   </ItemGroup>
@@ -106,6 +109,9 @@
     <ClInclude Include="include\DepthVideoStream.hpp" />
     <ClInclude Include="include\FeatureCapture.hpp" />
     <ClInclude Include="include\LowPassFilter.hpp" />
+    <ClInclude Include="include\ObstaclesBasicTracker.hpp" />
+    <ClInclude Include="include\SlidingWindowTracker.hpp" />
+    <ClInclude Include="include\TargetTracker.hpp" />
     <ClInclude Include="include\Utils.hpp" />
     <ClInclude Include="include\VideoStream.hpp" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 #define _APP_HPP_
 
 #define WINDOW_TITLE "Person tracker - FabLab Project"
+#include "TargetTracker.hpp"
 
 typedef enum
 {
@@ -33,18 +34,12 @@ public:
     friend void onMouse(int evt, int x, int y, int flags, void *userdata);
 
 protected:
-    // Detects features inside a specific radius around a mouse event
-    void updateRegionOfInterest(int x, int y, cv::Scalar fallbackValue);
-
     // The actual mouse callback
     void onMouse(int evt, int x, int y, int flags);
 
 private:
     cv::Mat lastVideoFrame;
     cv::Mat lastDepthFrame;
-
-    // Known keypoints
-    FeatureCapture tracking;
 
     // Mouse button status
     bool mouseDown;
@@ -57,6 +52,9 @@ private:
 
     // The video streams
     std::vector<std::shared_ptr<VideoStream> > videoStreams;
+
+    // The user tracker in use
+    std::shared_ptr<TargetTracker> targetTracker;
 };
 
 

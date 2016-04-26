@@ -9,9 +9,11 @@ VideoStream::VideoStream(const openni::Device &device, openni::SensorType sensor
     // Create device capture
     NICHECK(vs.create(device, sensorType));
 
+    vs.setMirroringEnabled(false);
+
     // Get video info
     vm = vs.getVideoMode();
-
+    
     // Start capture
     vs.start();
 }
