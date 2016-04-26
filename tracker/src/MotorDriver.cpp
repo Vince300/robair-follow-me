@@ -10,8 +10,8 @@ MotorDriver::MotorDriver()
     targetTracker(nullptr),
     doExit(false),
     /* PID initialization, kP, kI, kD */
-    speedController(0.8, 0.15, 0.05),
-    angleController(0.8, 0.15, 0.05)
+    speedController(0.6, 0.15, 0.05),
+    angleController(0.6, 0.01, 0.05)
 {
 }
 
@@ -48,6 +48,8 @@ void MotorDriver::threadCallback()
 
         double angle = 0.0, speed = 0.0;
         int16_t offset = 0;
+	int16_t scale = 127;
+        int16_t scaleAngle = scale / 3;
         if (tracker)
         {
             tracker->getCommandData(speed, angle);
@@ -55,19 +57,16 @@ void MotorDriver::threadCallback()
             speedController.setTargetValue(speed);
             angleController.setTargetValue(angle);
 
-            speed = speedController.timeStep();
             angle = angleController.timeStep();
 
-            int16_t scale = 127, scaleAngle = 30;
-            if (std::abs(angle) > 0.1) {
-                double scaled = (angle < 0.0 ? -1.0 : 0.0) * std::sqrt(std::abs(angle));
+            if (std::abs(speed) < 0.01) {
                 msg.speed1 = angle * scaleAngle;
                 msg.speed2 = -angle * scaleAngle;
-            }
-            else {
-                msg.speed1 = speed * scale;
-                msg.speed2 = speed * scale;
-            }
+            } else {
+		speed = speedController.timeStep();
+		msg.speed1 = speed * ((1.0 + angle) / 2.0 * scale);
+                msg.speed2 = speed * ((1.0 - angle) / 2.0 * scale);
+	    }
         }
         else
         {
@@ -80,10 +79,10 @@ void MotorDriver::threadCallback()
                   << std::endl;
 
         // Clamp values
-        if (msg.speed1 < -127) msg.speed1 = -127;
-        if (msg.speed1 > 127) msg.speed1 = 127;
-        if (msg.speed2 < -127) msg.speed2 = -127;
-        if (msg.speed2 > 127) msg.speed2 = 127;
+        if (msg.speed1 < -scale) msg.speed1 = -scale;
+        if (msg.speed1 > scale) msg.speed1 = scale;
+        if (msg.speed2 < -scale) msg.speed2 = -scale;
+        if (msg.speed2 > scale) msg.speed2 = scale;
 
         msg.speed1 += offset;
         msg.speed2 += offset;

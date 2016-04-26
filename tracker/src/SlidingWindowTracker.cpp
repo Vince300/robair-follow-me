@@ -16,7 +16,7 @@ SlidingWindowTracker::~SlidingWindowTracker()
 void SlidingWindowTracker::updateDisplayFrame(cv::Mat& displayFrame)
 {
     // Draw the centroid on the display frame
-    cv::drawMarker(displayFrame, cv::Point(tracking.poi_x, tracking.poi_y), cv::Scalar(255, 0, 255, 0));
+    cv::drawMarker(displayFrame, cv::Point(tracking.poi_x, tracking.poi_y), cv::Scalar(255, 0, 255, 0), cv::MARKER_CROSS, 20, 4);
 }
 
 void SlidingWindowTracker::doUpdateRegionOfInterest(int x, int y)
@@ -48,6 +48,8 @@ bool SlidingWindowTracker::doUpdateTarget()
 
         return true;
     }
+
+    setCommand(0.0, 0.0);
 
     return false;
 }
