@@ -9,10 +9,6 @@ PIDController::PIDController(double kP, double kI, double kD)
 {
 }
 
-PIDController::~PIDController()
-{
-}
-
 double PIDController::timeStep()
 {
     // compute e[n]
