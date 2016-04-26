@@ -6,9 +6,8 @@
 #include "Utils.hpp"
 #include "DepthVideoStream.hpp"
 #include "ColorVideoStream.hpp"
-
 #include "Application.hpp"
-#include <SlidingWindowTracker.hpp>
+#include "SlidingWindowTracker.hpp"
 
 void onMouse(int evt, int x, int y, int flags, void *userdata)
 {
