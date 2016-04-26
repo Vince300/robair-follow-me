@@ -17,7 +17,7 @@ typedef enum
 #include <OpenNI.h>
 
 #include "VideoStream.hpp"
-#include "FeatureCapture.hpp"
+#include "MotorDriver.hpp"
 
 class Application
 {
@@ -55,6 +55,9 @@ private:
 
     // The user tracker in use
     std::shared_ptr<TargetTracker> targetTracker;
+
+    // The motor driver
+    MotorDriver motorDriver;
 };
 
 

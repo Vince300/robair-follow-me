@@ -35,6 +35,7 @@ program tracker {
         include/DepthVideoStream.hpp
         include/FeatureCapture.hpp
         include/LowPassFilter.hpp
+        include/MotorDriver.hpp
         include/ObstaclesBasicTracker.hpp
         include/SlidingWindowTracker.hpp
         include/TargetTracker.hpp
@@ -48,6 +49,7 @@ program tracker {
         src/DepthVideoStream.cpp
         src/FeatureCapture.cpp
         src/LowPassFilter.cpp
+        src/MotorDriver.cpp
         src/ObstaclesBasicTracker.cpp
         src/SlidingWindowTracker.cpp
         src/TargetTracker.cpp

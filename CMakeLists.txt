@@ -36,6 +36,7 @@ add_executable(tracker
     tracker/src/DepthVideoStream.cpp
     tracker/src/FeatureCapture.cpp
     tracker/src/LowPassFilter.cpp
+    tracker/src/MotorDriver.cpp
     tracker/src/VideoStream.cpp
     tracker/src/ObstaclesBasicTracker.cpp
     tracker/src/SlidingWindowTracker.cpp

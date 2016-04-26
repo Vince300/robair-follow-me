@@ -20,7 +20,8 @@ Application::Application()
     device(), 
     mode(Video), 
     videoStreams(), 
-    targetTracker(std::make_shared<SlidingWindowTracker>())
+    targetTracker(std::make_shared<SlidingWindowTracker>()),
+    motorDriver()
 {
     // Init OpenNI device
     openni::OpenNI::initialize();
