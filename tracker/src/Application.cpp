@@ -30,6 +30,8 @@ Application::Application()
     // Init video streams
     videoStreams.push_back(std::static_pointer_cast<VideoStream>(std::make_shared<ColorVideoStream>(device)));
     videoStreams.push_back(std::static_pointer_cast<VideoStream>(std::make_shared<DepthVideoStream>(device)));
+
+    motorDriver.setTargetTracker(targetTracker);
 }
 
 Application::~Application()

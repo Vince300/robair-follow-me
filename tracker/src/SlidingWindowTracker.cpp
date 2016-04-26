@@ -35,7 +35,7 @@ bool SlidingWindowTracker::doUpdateTarget()
         doUpdateRegionOfInterest(m.m10 / m.m00, m.m01 / m.m00, tracking.mean);
 
         /******* BEGIN UPDATE OF HEADING *******/
-        double distance = tracking.mean.val[0];
+        double distance = tracking.mean.val[0] / 1000.0;
         double angle = 0.0,
                speed = std::max(std::min(distance - 1.0, 1.0), 0.0);
 

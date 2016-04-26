@@ -1,6 +1,7 @@
 #ifndef _MOTORDRIVER_HPP_
 #define _MOTORDRIVER_HPP_
 
+#include <thread>
 #include "TargetTracker.hpp"
 
 class MotorDriver {
