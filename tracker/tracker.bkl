@@ -1,19 +1,11 @@
-toolsets = gnu vs2015;
+toolsets = vs2015;
 archs = x86_64;
 
 outputdir            = build;
 includedirs         += include;
-gnu.makefile         = Makefile;
 vs2015.option.IntDir = 'obj\\$(Configuration)\\';
 
-if ($(toolset) == vs2015) {
-    c-compiler-options += '/D_CRT_SECURE_NO_WARNINGS /DINLINE=__inline /D_USE_MATH_DEFINES';
-}
-
-if ($(toolset) == gnu) {
-    cxx-compiler-options += '-std=c++11';
-    c-compiler-options += '-DINLINE=inline';
-}
+c-compiler-options += '/D_CRT_SECURE_NO_WARNINGS /DINLINE=__inline /D_USE_MATH_DEFINES';
 
 program tracker {
     // Include directories for libraries
@@ -22,23 +14,16 @@ program tracker {
     // OpenCV .lib/.a reference
     libdirs += '$(OPENCV_LIBDIR)';
 
-    if ($(toolset) == vs2015) {
-        if ($(config) == Debug) {
-            includedirs += '$(OPENCV_INCLUDE)_debug';
-            libs += opencv_core310d opencv_highgui310d opencv_imgproc310d;
-        }
-
-        if ($(config) == Release) {
-            includedirs += '$(OPENCV_INCLUDE)';
-            libs += opencv_core310 opencv_highgui310 opencv_imgproc310;
-        }
+    if ($(config) == Debug) {
+        includedirs += '$(OPENCV_INCLUDE)_debug';
+        libs += opencv_core310d opencv_highgui310d opencv_imgproc310d;
     }
 
-    if ($(toolset) == gnu) {
+    if ($(config) == Release) {
         includedirs += '$(OPENCV_INCLUDE)';
-        libs += opencv_core opencv_highgui opencv_imgproc;
+        libs += opencv_core310 opencv_highgui310 opencv_imgproc310;
     }
-
+    
     // OpenNI .lib/.a reference
     libdirs += '$(OPENNI_LIBDIR)';
     libs += OpenNI2;
