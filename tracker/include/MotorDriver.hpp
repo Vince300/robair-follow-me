@@ -28,6 +28,8 @@ public:
     void setTargetTracker(const std::shared_ptr<TargetTracker> &value);
 
 private:
+	//Callback called by the start_suivi from the web interface
+	void activationCallback(const std_msgs::Bool::ConstPtr& msg)
     /// ROS thread callback.
     void threadCallback();
     /// ROS thread.
@@ -40,6 +42,8 @@ private:
     PIDController speedController;
     /// PID Controller for the angle value
     PIDController angleController;
+	/// should robair stop following orders from the tracker
+	bool pauseSuivi;
 };
 
 #endif

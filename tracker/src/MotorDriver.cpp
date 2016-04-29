@@ -5,15 +5,33 @@
 
 #include "MotorDriver.hpp"
 
+
+
+
 MotorDriver::MotorDriver()
     : workerThread(&MotorDriver::threadCallback, this),
     targetTracker(nullptr),
     doExit(false),
     /* PID initialization, kP, kI, kD */
+<<<<<<< HEAD
     speedController(0.6, 0.15, 0.05),
     angleController(0.6, 0.01, 0.05)
+=======
+    speedController(0.8, 0.15, 0.05),
+    angleController(0.8, 0.15, 0.05),
+	pauseSuivi(true)
+>>>>>>> tentative listener on suivi_start
 {
 }
+
+
+void MotorDriver::activationCallback(const std_msgs::Bool::ConstPtr& msg)
+{
+  ROS_INFO("I heard: [%s]", msg);
+	pauseSuivi = !pauseSuivi;
+//TODO : vraiment lire la valeur du message
+}
+
 
 void MotorDriver::stop()
 {
@@ -34,8 +52,9 @@ void MotorDriver::threadCallback()
        message de type md49test::MotorCmd dessus, 1000 messages dans
        le buffer */
     ros::Publisher chatter_pub = npub.advertise<md49test::MotorCmd>("cmdmotors", 1000);
+	ros::Subscriber listenerActivationSuivi = npub.subscribe("start_suivi", 2, activationCallback);
 
-    /*Nombre de messages par seconde*/
+
     ros::Rate loop_rate(10);
 
     while (ros::ok() && !doExit)
@@ -47,9 +66,11 @@ void MotorDriver::threadCallback()
         md49test::MotorCmd msg;
 
         double angle = 0.0, speed = 0.0;
+
         int16_t scale = 127;
         int16_t scaleAngle = scale / 3;
-        if (tracker)
+        int16_t offset = 0;
+        if (tracker && !pauseSuivi)
         {
             tracker->getCommandData(speed, angle);
             
