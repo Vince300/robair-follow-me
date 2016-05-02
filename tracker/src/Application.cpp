@@ -15,10 +15,10 @@ void onMouse(int evt, int x, int y, int flags, void *userdata)
 }
 
 Application::Application()
-    : mouseDown(false), 
-    device(), 
-    mode(Video), 
-    videoStreams(), 
+    : mouseDown(false),
+    device(),
+    mode(Video),
+    videoStreams(),
     targetTracker(std::make_shared<SlidingWindowTracker>()),
     motorDriver()
 {
@@ -54,6 +54,7 @@ void Application::run()
 
     bool exit = false;
     int frameId = 0;
+    bool wasTrackingEnabled = false;
 
     while (!exit)
     {
@@ -77,6 +78,20 @@ void Application::run()
 
         // Display resulting image
         cv::imshow(WINDOW_TITLE, displayFrame);
+
+        // Check if tracking state changed
+        if (!wasTrackingEnabled && motorDriver.isTrackingEnabled())
+        {
+            wasTrackingEnabled = true;
+
+            // pick the center of the rgb stream as the target
+            targetTracker->updateRegionOfInterest(lastVideoFrame.cols / 2, lastVideoFrame.rows / 2);
+        }
+        else if (wasTrackingEnabled && !motorDriver.isTrackingEnabled())
+        {
+            // tracking was disabled
+            wasTrackingEnabled = false;
+        }
 
         // Wait right amount of time not to exceed frame rate
         double targetPeriod = 1.0 / vs.frameRate();

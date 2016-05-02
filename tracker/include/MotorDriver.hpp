@@ -27,9 +27,14 @@ public:
      */
     void setTargetTracker(const std::shared_ptr<TargetTracker> &value);
 
+    /**
+     * \brief Gets a value indicating whether we should follow the user or not.
+     */
+    bool isTrackingEnabled() const { return !pauseSuivi; }
+
 private:
-	//Callback called by the start_suivi from the web interface
-	void activationCallback(const std_msgs::Bool::ConstPtr& msg)
+    //Callback called by the start_suivi from the web interface
+    void activationCallback(const std_msgs::Bool::ConstPtr& msg);
     /// ROS thread callback.
     void threadCallback();
     /// ROS thread.
@@ -42,8 +47,8 @@ private:
     PIDController speedController;
     /// PID Controller for the angle value
     PIDController angleController;
-	/// should robair stop following orders from the tracker
-	bool pauseSuivi;
+    /// should robair stop following orders from the tracker
+    bool pauseSuivi;
 };
 
 #endif
