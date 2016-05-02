@@ -4,6 +4,7 @@
 #include <thread>
 #include "TargetTracker.hpp"
 #include "PIDController.hpp"
+#include <std_msgs/Bool.h>
 
 /**
  * \brief Represents the motor driving interface and worker thread.

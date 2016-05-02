@@ -40,7 +40,7 @@ void MotorDriver::threadCallback()
        message de type md49test::MotorCmd dessus, 1000 messages dans
        le buffer */
     ros::Publisher chatter_pub = npub.advertise<md49test::MotorCmd>("cmdmotors", 1000);
-    ros::Subscriber listenerActivationSuivi = npub.subscribe("start_suivi", 2, activationCallback);
+    ros::Subscriber listenerActivationSuivi = npub.subscribe("start_suivi", 2, &MotorDriver::activationCallback, this);
 
 
     ros::Rate loop_rate(10);
