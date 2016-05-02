@@ -58,9 +58,12 @@ void MotorDriver::threadCallback()
         int16_t scale = 127;
         int16_t scaleAngle = scale / 3;
         int16_t offset = 0;
-        if (tracker && !pauseSuivi)
+        if (tracker)
         {
-            tracker->getCommandData(speed, angle);
+            // Smooth stopping of robert by using PIDs even if tracking
+            // is not enabled.
+            if (!pauseSuivi)
+                tracker->getCommandData(speed, angle);
             
             speedController.setTargetValue(speed);
             angleController.setTargetValue(angle);
