@@ -18,7 +18,8 @@ MotorDriver::MotorDriver()
 
 void MotorDriver::activationCallback(const std_msgs::Bool::ConstPtr& msg)
 {
-    pauseSuivi = !pauseSuivi;
+    // msg->data true when we should start tracking, see ros_management.js:920
+    pauseSuivi = !msg->data;
 }
 
 void MotorDriver::stop()
