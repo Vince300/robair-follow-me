@@ -35,13 +35,15 @@ program tracker {
         include/DepthVideoStream.hpp
         include/FeatureCapture.hpp
         include/LowPassFilter.hpp
-        include/MotorDriver.hpp
         include/ObstaclesBasicTracker.hpp
         include/SlidingWindowTracker.hpp
         include/TargetTracker.hpp
         include/Utils.hpp
         include/VideoStream.hpp
         include/PIDController.hpp
+
+        include/md.hpp
+        include/noros/MotorDriver.hpp
     }
 
     sources {

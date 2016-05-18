@@ -4,7 +4,6 @@
 #include <thread>
 #include "TargetTracker.hpp"
 #include "PIDController.hpp"
-#include <std_msgs/Bool.h>
 
 /**
  * \brief Represents the motor driving interface and worker thread.
@@ -34,8 +33,6 @@ public:
     bool isTrackingEnabled() const { return !pauseSuivi; }
 
 private:
-    /// Callback called by the start_suivi from the web interface
-    void activationCallback(const std_msgs::Bool::ConstPtr& msg);
     /// ROS thread callback.
     void threadCallback();
     /// ROS thread.

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <opencv2/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
 #include <algorithm>
 
 #include "SlidingWindowTracker.hpp"
@@ -112,6 +113,10 @@ void SlidingWindowTracker::doUpdateRegionOfInterest(int x, int y, cv::Scalar fal
         tracking.mean = outMean;
         tracking.poi_x = x;
         tracking.poi_y = y;
+
+#if _DEBUG
+        cv::imshow("Mask data", outMask);
+#endif
     }
     else {
         tracking.mean = cv::Scalar(0);

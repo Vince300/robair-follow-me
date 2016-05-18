@@ -32,9 +32,6 @@
     <ClInclude Include="include\LowPassFilter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\MotorDriver.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\ObstaclesBasicTracker.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -51,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\PIDController.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\md.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

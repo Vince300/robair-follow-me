@@ -111,7 +111,7 @@
     <ClInclude Include="include\DepthVideoStream.hpp" />
     <ClInclude Include="include\FeatureCapture.hpp" />
     <ClInclude Include="include\LowPassFilter.hpp" />
-    <ClInclude Include="include\MotorDriver.hpp" />
+    <ClInclude Include="include\md.hpp" />
     <ClInclude Include="include\ObstaclesBasicTracker.hpp" />
     <ClInclude Include="include\SlidingWindowTracker.hpp" />
     <ClInclude Include="include\TargetTracker.hpp" />

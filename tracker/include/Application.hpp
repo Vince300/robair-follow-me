@@ -8,7 +8,7 @@
 #include <OpenNI.h>
 
 #include "VideoStream.hpp"
-#include "MotorDriver.hpp"
+#include "md.hpp"
 
 #define WINDOW_TITLE "Person tracker - FabLab Project"
 #include "TargetTracker.hpp"
